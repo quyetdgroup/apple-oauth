@@ -3,6 +3,7 @@ import { Promise } from 'meteor/promise';
 import Apple from './namespace.js';
 import { Accounts } from 'meteor/accounts-base';
 import { getAppIdFromOptions, getClientIdFromOptions, getServiceConfiguration } from './utils';
+import { CONSTANT } from './constant';
 
 const jwt = require('jsonwebtoken');
 const jwksClient = require('jwks-rsa');
@@ -269,8 +270,11 @@ const getServiceData = query =>
   getServiceDataFromTokens(query, getTokens(query, false), false);
 OAuth.registerService('apple', 2, null, getServiceData);
 Accounts.registerLoginHandler(query => {
-  if (query.methodName != 'native-apple') {
+  if (query.methodName === CONSTANT.METHOD_NAMES.NativeApple) {
+    return getServiceDataFromTokens(query, getTokens(query, true), true);
+  } else if (query.methodName === CONSTANT.METHOD_NAMES.WebApple) {
+    return getServiceDataFromTokens(query, getTokens(query, false), false);
+  } else {
     return;
   }
-  return getServiceDataFromTokens(query, getTokens(query, true), true);
 });
