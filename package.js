@@ -1,6 +1,6 @@
 Package.describe({
     name: 'designveloper:apple-oauth',
-    version: '3.0.0',
+    version: '3.0.2',
     summary: 'Sign in with Apple OAuth flow - fork from quavedev',
     git: 'https://github.com/quyetdgroup/apple-oauth',
 });

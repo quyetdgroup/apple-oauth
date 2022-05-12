@@ -109,7 +109,7 @@ const getServiceDataFromTokens = (query, tokens, isNative = false) => {
     options.profile.name = tokens.user.name;
   }
 
-  return Object.values(METHOD_NAMES).includes(query.methodName)
+  return Object.values(CONSTANT.METHOD_NAMES).includes(query.methodName)
     ? Accounts.updateOrCreateUserFromExternalService(
         'apple',
         serviceData,
